@@ -14,25 +14,26 @@ pipeline {
     }
 
     stage('Cypress Testing') {
-
       steps {
         script {
-        def job = jenkins.model.Jenkins.instance.getItemByFullName("Job name")
-        def result = job.getLastBuild().getResult().toString()
-        env.result = result
-
+          def job = jenkins.model.Jenkins.instance.getItemByFullName("Job name")
+          def result = job.getLastBuild().getResult().toString()
+          env.result = result
         }
+
         sh '''npm run build 
 npm start &
 npm run cypress'''
       }
     }
-    stage('Readme Status'){
+
+    stage('Readme Status') {
       steps {
-      sh '''
+        sh '''
         node JenkinsScripts/readmeUpdate.js ${env.result}
       '''
       }
     }
+
   }
 }
