@@ -13,5 +13,13 @@ pipeline {
       }
     }
 
+    stage('Cypress Testing') {
+      steps {
+        sh '''npm run build 
+npm start &
+npm run cypress'''
+      }
+    }
+
   }
 }
