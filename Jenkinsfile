@@ -23,9 +23,12 @@ npm start &
 npm run cypress'''
       }
     }
-    stage('Readme Status')
+    stage('Readme Status'){
+      steps {
       sh '''
         node JenkinsScripts/readmeUpdate.js ${env.result}
       '''
+      }
+    }
   }
 }
