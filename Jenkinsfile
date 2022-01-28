@@ -16,7 +16,7 @@ pipeline {
     stage('Cypress Testing') {
       steps {
         script {
-          def job = jenkins.model.Jenkins.instance.getItemByFullName("Job name")
+          def job = jenkins.model.Jenkins.instance.getItemByFullName("Cypress Testing")
           def result = job.getLastBuild().getResult().toString()
           env.result = result
         }
