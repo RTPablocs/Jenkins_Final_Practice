@@ -14,10 +14,14 @@ pipeline {
     }
 
     stage('Cypress Testing') {
+
+      steps {
+        script {
         def job = jenkins.model.Jenkins.instance.getItemByFullName("Job name")
         def result = job.getLastBuild().getResult().toString()
         env.result = result
-      steps {
+
+        }
         sh '''npm run build 
 npm start &
 npm run cypress'''
