@@ -24,5 +24,4 @@ pipeline {
         sh {node JenkinsScripts/readmeUpdate.js ${env.result}}
       }
     }
-    }
   }
