@@ -15,12 +15,6 @@ pipeline {
 
     stage('Cypress Testing') {
       steps {
-        script {
-          def job = jenkins.model.Jenkins.instance.getItemByFullName("Cypress Testing")
-          def result = job.getLastBuild().getResult().toString()
-          env.result = result
-        }
-
         sh '''npm run build 
 npm start &
 npm run cypress'''
@@ -35,5 +29,8 @@ npm run cypress'''
       }
     }
 
+  }
+  environment {
+    Cypress = ''
   }
 }
