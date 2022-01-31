@@ -15,11 +15,11 @@ pipeline {
 
     stage('Cypress Testing') {
       steps {
+        sh 'npm run dev'
         script {
           env.CYPRESS = sh(script: "./node_modules/.bin/cypress run", returnStatus:true)
         }
 
-        sh 'npm dev'
       }
     }
 
