@@ -26,7 +26,7 @@ pipeline {
     stage('Readme Status') {
       steps {
         script {
-          sh {node JenkinsScripts/readmeUpdate.js ${env.result}}
+          echo env.CYPRESS
         }
 
       }
