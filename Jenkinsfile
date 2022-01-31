@@ -21,7 +21,9 @@ pipeline {
         }
       stage('Readme Status') {
       steps {
-        sh {node JenkinsScripts/readmeUpdate.js ${env.result}}
+        script {
+           sh {node JenkinsScripts/readmeUpdate.js ${env.result}}
+        }
       }
     }
   }
