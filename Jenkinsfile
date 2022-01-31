@@ -15,7 +15,8 @@ pipeline {
 
     stage('Cypress Testing') {
       steps {
-        sh 'npm run dev'
+        sh '''npm run build
+npm run start'''
         script {
           env.CYPRESS = sh(script: "./node_modules/.bin/cypress run", returnStatus:true)
         }
