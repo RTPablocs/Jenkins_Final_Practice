@@ -12,19 +12,29 @@ pipeline {
         sh 'npm run lint'
       }
     }
-      stage('Cypress Testing'){
+
+    stage('Cypress Testing') {
+      steps {
+        sh '''npm run build 
+npm start &
+npm run cypress'''
+      }
+      stage('Test'){
             steps{
                 script {
-                    env.CYPRESS = sh(script: "./node_modules/.bin/cypress run", returnStatus:true)
+                    env.TEST = sh(script: "./node_modules/.bin/cypress run ",returnStatus:true)
                 }
             }
         }
-      stage('Readme Status') {
+    }
+
+    stage('Readme Status') {
       steps {
-        script {
-           sh {node JenkinsScripts/readmeUpdate.js ${env.result}}
-        }
+        sh(
+        node JenkinsScripts/readmeUpdate.js ${env.result}
+        )
       }
     }
+
   }
 }
