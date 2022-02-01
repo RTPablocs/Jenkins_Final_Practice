@@ -19,10 +19,10 @@ const mailOptions = {
     from: 'pablo@pablocs.com',
     to: 'amdpablocs@gmail.com',
     subject: 'Resultado de la Pipeline de NextJS',
-    text: `linter_job: ${process.argv[3]} \n
-    cypress_job: ${process.argv[4]} \n
-    badge_job: ${process.argv[5]} \n
-    deploy_job: ${process.argv[6]}`
+    text: `linter_job: ${process.argv[4]} \n
+    cypress_job: ${process.argv[5]} \n
+    badge_job: ${process.argv[6]} \n
+    deploy_job: ${process.argv[7]}`
 };
 
 

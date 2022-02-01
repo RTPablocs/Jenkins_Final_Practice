@@ -9,7 +9,9 @@ pipeline {
 
     stage('Lint') {
       steps {
-        sh 'npm run lint'
+        script {
+          env.LINTER = sh(script:'npm run lint', returnStatus: true)
+        }
       }
     }
 
@@ -25,7 +27,9 @@ pipeline {
 
     stage('Readme Status') {
       steps {
-        sh """node JenkinsScripts/readmeUpdate.js ${env.CYPRESS} """
+        script {
+          env.README = sh(script:'node JenkinsScripts/readmeUpdate.js ${env.CYPRESS}', returnStatus:true)
+        }
         sh 'chmod +x JenkinsScripts/Committer.sh'
         withCredentials([usernameColonPassword(credentialsId: 'github', variable: 'access')]){
           sh """./JenkinsScripts/Committer.sh ${access} ${params.Ejecutor} ${params.Motivo}"""
@@ -47,7 +51,7 @@ pipeline {
     stage('Notification') {
       steps{
       withCredentials([usernamePassword(credentialsId: 'ionos-mailer-creds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
-              sh 'node JenkinsScripts/mailer.js $USERNAME $PASSWORD'
+              sh 'node JenkinsScripts/mailer.js $USERNAME $PASSWORD $env.LINTER $env.CYPRESS $env.README $env.VERCEL'
             }
       }
 }
