@@ -32,7 +32,7 @@ pipeline {
     }
 
   }
-    parameters {
+  parameters {
     string(name: 'Ejecutor', description: 'Ejecutor')
     string(name: 'Motivo', description: 'Motivo')
     string(name: 'Correo', description: 'Correo')
