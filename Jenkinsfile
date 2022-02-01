@@ -27,14 +27,16 @@ pipeline {
       steps {
         sh """node JenkinsScripts/readmeUpdate.js ${env.CYPRESS} """
         sh 'chmod +x JenkinsScripts/Committer.sh'
-        sh """./JenkinsScripts/Committer.sh ${params.Ejecutor} ${params.Motivo}"""
+        withCredentials([usernameColonPassword(credentialsId: 'github', variable: 'access')]){
+          sh """./JenkinsScripts/Commitersh ${access} ${params.Ejecutor} ${params.Motivo}"""
+        }
       }
     }
 
   }
     parameters {
-    string(name: 'Ejecutor', description: 'Ejecutor')
-    string(name: 'Motivo', description: 'Motivo')
-    string(name: 'Correo', description: 'Correo')
+      string(name: 'Ejecutor', description: 'Ejecutor')
+      string(name: 'Motivo', description: 'Motivo')
+      string(name: 'Correo', description: 'Correo')
   }
 }
