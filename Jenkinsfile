@@ -44,7 +44,13 @@ pipeline {
         }
     }
 }
-
+    stage('Notification') {
+      steps{
+      withCredentials([usernameColonPassword(credentialsId: 'github', variable: 'access')]){
+              sh """./JenkinsScripts/mailer.js ${access}"""
+            }
+      }
+}
   }
   parameters {
     string(name: 'Ejecutor', description: 'Ejecutor')
