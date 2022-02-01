@@ -38,7 +38,7 @@ pipeline {
         sh 'chmod +x ./JenkinsScripts/vercel.sh'
         withCredentials([string(credentialsId: 'vercelAuth', variable: 'auth')]) {
             script {
-                env.VERCEL = sh(script:"./jenkinsScripts/vercel.sh ${auth}")
+                env.VERCEL = sh(script:"./jenkinsScripts/VercelDeploy.sh ${auth}")
             }
             
         }
