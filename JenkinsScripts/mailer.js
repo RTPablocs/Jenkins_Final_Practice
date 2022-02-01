@@ -1,6 +1,9 @@
 const mailer = require('nodemailer')
 
-
+console.log({
+    user: process.argv[2],
+    passs: process.argv[3]
+})
 
 
 const transporter = mailer.createTransport({
@@ -23,7 +26,7 @@ const mailOptions = {
 };
 
 
-transporter.sendMail(mailOptions, function(error, info){
+transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
         console.log(error);
     } else {
