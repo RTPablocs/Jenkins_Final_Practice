@@ -28,7 +28,7 @@ pipeline {
         sh """node JenkinsScripts/readmeUpdate.js ${env.CYPRESS} """
         sh 'chmod +x JenkinsScripts/Committer.sh'
         withCredentials([usernameColonPassword(credentialsId: 'github', variable: 'access')]){
-          sh """./JenkinsScripts/Commitersh ${access} ${params.Ejecutor} ${params.Motivo}"""
+          sh """./JenkinsScripts/Commiter.sh ${access} ${params.Ejecutor} ${params.Motivo}"""
         }
       }
     }
