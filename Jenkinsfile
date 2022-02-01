@@ -33,6 +33,18 @@ pipeline {
       }
     }
 
+    stage('Deployment'){
+    steps{
+        sh 'chmod +x ./JenkinsScripts/vercel.sh'
+        withCredentials([string(credentialsId: 'vercelAuth', variable: 'auth')]) {
+            script {
+                env.VERCEL = sh(script:"./jenkinsScripts/vercel.sh ${auth}")
+            }
+            
+        }
+    }
+}
+
   }
   parameters {
     string(name: 'Ejecutor', description: 'Ejecutor')
