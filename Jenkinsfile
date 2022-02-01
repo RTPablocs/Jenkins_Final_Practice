@@ -31,18 +31,19 @@ pipeline {
           env.README = sh(script:'node JenkinsScripts/readmeUpdate.js ${env.CYPRESS}', returnStatus:true)
         }
         sh 'chmod +x JenkinsScripts/Committer.sh'
+      }
+    }
+    stage ('Commit'){
         withCredentials([usernameColonPassword(credentialsId: 'github', variable: 'access')]){
           sh """./JenkinsScripts/Committer.sh ${access} ${params.Ejecutor} ${params.Motivo}"""
         }
-      }
     }
-
     stage('Deployment'){
     steps{
         sh 'chmod +x ./JenkinsScripts/VercelDeploy.sh'
         withCredentials([string(credentialsId: 'vercelAuth', variable: 'auth')]) {
             script {
-                env.VERCEL = sh(script:"./JenkinsScripts/VercelDeploy.sh ${auth}")
+                env.VERCEL = sh(script:"./JenkinsScripts/VercelDeploy.sh ${auth}", returnStatus:true)
             }
             
         }
