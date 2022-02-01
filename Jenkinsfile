@@ -34,9 +34,11 @@ pipeline {
       }
     }
     stage ('Commit'){
+      steps{
         withCredentials([usernameColonPassword(credentialsId: 'github', variable: 'access')]){
           sh """./JenkinsScripts/Committer.sh ${access} ${params.Ejecutor} ${params.Motivo}"""
         }
+      }
     }
     stage('Deployment'){
     steps{
