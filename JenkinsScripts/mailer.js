@@ -1,15 +1,14 @@
 const mailer = require('nodemailer')
 
-console.log(process.argv[2])
-const data = process.argv[2].split('/')
+
 
 
 const transporter = mailer.createTransport({
     host: 'smtp.ionos.es',
     port: 587,
     auth: {
-        user: data[0],
-        passs: data[1]
+        user: process.argv[2],
+        passs: process.argv[3]
     }
 });
 
