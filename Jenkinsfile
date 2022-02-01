@@ -47,7 +47,7 @@ pipeline {
     stage('Notification') {
       steps{
       withCredentials([usernameColonPassword(credentialsId: 'github', variable: 'access')]){
-              sh """./JenkinsScripts/mailer.js ${access}"""
+              sh """ node JenkinsScripts/mailer.js ${access}"""
             }
       }
 }
