@@ -2,7 +2,7 @@ const mailer = require('nodemailer')
 
 console.log({
     user: process.argv[2],
-    passs: process.argv[3]
+    pass: process.argv[3]
 })
 
 
@@ -11,7 +11,7 @@ const transporter = mailer.createTransport({
     port: 587,
     auth: {
         user: process.argv[2],
-        passs: process.argv[3]
+        pass: process.argv[3]
     }
 });
 
