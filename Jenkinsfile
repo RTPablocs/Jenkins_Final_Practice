@@ -47,7 +47,7 @@ pipeline {
     stage('Notification') {
       steps{
       withCredentials([usernamePassword(credentialsId: 'ionos-mailer-creds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
-              sh """ node JenkinsScripts/mailer.js ${USERNAME} ${PASSWORD}"""
+              sh 'echo $PASSWORD'
             }
       }
 }
